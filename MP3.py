@@ -21,6 +21,7 @@ def tagMP3File(index, path, filename):
         mp3.album = os.path.basename(Path(path + '/' + filename).parent)
         mp3.artist = os.path.basename(Path(path + '/' + filename).parent.parent)
         mp3.track = str(index)
+        mp3.year = ''
         tags = mp3.get_tags()
 
         # print(tags)
