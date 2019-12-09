@@ -53,7 +53,8 @@ def tagMP3Files(path):
 
 def main():
     path = input("Enter the directory path where you need to rename: ")
-    tagMP3Files(path)
+    absolute_path = os.path.abspath(path)
+    tagMP3Files(absolute_path)
 
 
 if __name__ == "__main__":
