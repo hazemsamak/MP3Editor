@@ -6,7 +6,7 @@ def main():
     path = input("Enter the directory path: ")
     absolute_path = os.path.abspath(path)
     renameFolderFiles(absolute_path)
-    tagMP3Files(path)
+    tagMP3Files(absolute_path)
 
 if __name__ == "__main__":
     main()
