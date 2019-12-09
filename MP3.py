@@ -3,14 +3,21 @@ from mp3_tagger import MP3File, VERSION_1, VERSION_2, VERSION_BOTH
 from pathlib import Path
 
 
-def renameFile(index, path, filename):
+def tagMP3File(index, path, filename):
     if '.mp3' in filename:
-        filename_without_ext = os.path.splitext(filename)[0]
+        song_name = os.path.splitext(filename)[0]
+        print('old name'+ song_name)
+        if len(song_name.split('.')) > 1:
+            song_name = song_name.split('.')[1]
+
+        print(song_name+' -> '+song_name.replace('_', ' '))
+        song_name = song_name.replace('_', ' ')
+
 
         mp3 = MP3File(path + '/' + filename)
-        print(os.path.basename(Path(path + '/' + filename).parent))
 
-        mp3.song = filename_without_ext
+
+        mp3.song = song_name
         mp3.album = os.path.basename(Path(path + '/' + filename).parent)
         mp3.artist = os.path.basename(Path(path + '/' + filename).parent.parent)
         mp3.track = str(index)
@@ -31,14 +38,14 @@ def renameFile(index, path, filename):
 
 
 
-def renameFolderFiles(path):
+def tagMP3Files(path):
     index = 1
     for filename in os.listdir(path):
 
         if os.path.isdir(path + '/' + filename):
-            renameFolderFiles(path + '/' + filename)
+            tagMP3Files(path + '/' + filename)
         elif os.path.isfile(path + '/' + filename):
-            renameFile(index, path, filename)
+            tagMP3File(index, path, filename)
             index += 1
 
     return
@@ -46,7 +53,7 @@ def renameFolderFiles(path):
 
 def main():
     path = input("Enter the directory path where you need to rename: ")
-    renameFolderFiles(path)
+    tagMP3Files(path)
 
 
 if __name__ == "__main__":
