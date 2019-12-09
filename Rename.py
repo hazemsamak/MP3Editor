@@ -4,7 +4,7 @@ from mp3_tagger import MP3File, VERSION_1, VERSION_2, VERSION_BOTH
 def renameFile(path, filename):
     if '.mp3' in filename:
 
-        if len(filename.split('.')) > 1:
+        if len(filename.split('.')) > 2:
             new_name = filename.split('.')[-2] + '.mp3'
         else :
             return
