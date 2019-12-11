@@ -41,7 +41,7 @@ def tagMP3File(index, path, filename):
 
 def tagMP3Files(path):
     index = 1
-    for filename in os.listdir(path):
+    for filename in sorted(os.listdir(path)):
 
         if os.path.isdir(path + '/' + filename):
             tagMP3Files(path + '/' + filename)
