@@ -1,7 +1,7 @@
 import os
 from mp3_tagger import MP3File, VERSION_1, VERSION_2, VERSION_BOTH
 from pathlib import Path
-
+from mutagen.mp3 import MP3
 
 def tagMP3File(index, path, filename):
     if '.mp3' in filename:
@@ -13,6 +13,13 @@ def tagMP3File(index, path, filename):
         print(song_name+' -> '+song_name.replace('_', ' '))
         song_name = song_name.replace('_', ' ')
 
+        mp3 = MP3(path + '/' + filename)
+        try:
+            mp3.delete()
+            mp3.save()
+            print('ok!')
+        except:
+            print('no ID3 tag')
 
         mp3 = MP3File(path + '/' + filename)
 
